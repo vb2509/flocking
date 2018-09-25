@@ -54,9 +54,14 @@ class Particle {
     
     Float dist = location.dist(other.location);
     
-    if(dist<radius+other.radius){
+    if(dist<radius+other.radius+20){
       
-      Float ui = this.velocity.x;
+      PVector direction=PVector.sub(this.location,other.location);
+      direction.limit(1);
+      this.velocity=new PVector(0,0);
+      this.addForce(direction);
+      
+      /*Float ui = this.velocity.x;
       Float uj = other.velocity.x;          
       this.velocity.x = (other.mass*(uj-ui) + this.mass*ui + other.mass*uj)/( this.mass + other.mass);
       other.velocity.x = (this.mass*(ui-uj) + this.mass*ui + other.mass*uj)/( this.mass + other.mass);
@@ -78,7 +83,7 @@ class Particle {
       else if(location.y>other.location.y+other.radius-0.1){
         location.y+=(1);
       }
-     
+     */
     }
   }
 }
